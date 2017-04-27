@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bs.com.dao.ICSDao">
+
+	<resultMap type="bs.com.bean.User" id="userResultMap">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="username" property="username" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="bs.com.bean.Sales" id="salesResultMap">
+		<result column="fid" property="fid" jdbcType="INTEGER" />
+		<result column="fName" property="fName" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap type="bs.com.bean.Stock" id="stockResultMap">
+		<result column="fid" property="fid" jdbcType="INTEGER" />
+		<result column="fName" property="fName" jdbcType="VARCHAR" />
+		<result column="time" property="time" jdbcType="VARCHAR" />
+		<result column="num" property="num" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap type="bs.com.bean.Food" id="foodResultMap">
+		<result column="id" property="id" jdbcType="INTEGER" />
+		<result column="kucun" property="kucun" jdbcType="INTEGER" />
+		<result column="price" property="price" jdbcType="DOUBLE" />
+		<result column="foodName" property="foodName" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="VARCHAR" />
+		<result column="units" property="units" jdbcType="VARCHAR" />
+	</resultMap>
+
+	<insert id="addUser" parameterType="java.util.Map">
+	INSERT INTO `user` (`username`, `password`) 
+	VALUES
+	  (#{username}, #{password}) ;
+	</insert>
+
+	<select id="queryUser" resultMap="userResultMap" parameterType="java.util.Map">
+	SELECT 
+	  `id`,
+	  `username`,
+	  `password` 
+	FROM
+	  `user` 
+	LIMIT 0, 1000 ;
+	</select>
+	<insert id="addSales" parameterType="java.util.Map">
+	INSERT INTO `sales` (`fid`, `fName`, `num`, `time`) 
+	VALUES
+	  (#{fid}, #{fName}, #{num}, #{time}) ;
+	</insert>
+
+	<select id="querySales" resultMap="salesResultMap" parameterType="java.util.Map">
+	SELECT 
+	  `fid`,
+	  `fName`,
+	  `num`,
+	  `time` 
+	FROM
+	  `sales` 
+	LIMIT 0, 1000 ;
+	</select>
+	<insert id="addStock" parameterType="java.util.Map">
+	INSERT INTO `stock` (`fid`, `fName`, `num`, `time`) 
+VALUES
+  (#{fid}, #{fName}, #{num}, #{time}) ;
+	</insert>
+
+	<select id="queryStock" resultMap="stockResultMap" parameterType="java.util.Map">
+	SELECT 
+	  `fid`,
+	  `fName`,
+	  `num`,
+	  `time` 
+	FROM
+	  `stock` 
+	LIMIT 0, 1000 ;
+	</select>
+	
+	<insert id="addFood" parameterType="java.util.Map">
+	INSERT INTO `food` (
+	  `foodName`,
+	  `kucun`,
+	  `type`,
+	  `units`,
+	  `price`
+	) 
+	VALUES
+	  (
+	    #{foodName},
+	    #{kucun},
+	    #{type},
+	    #{units},
+	    #{price}
+	  ) ;
+	</insert>
+
+	<select id="queryFood" resultMap="foodResultMap" parameterType="java.util.Map">
+	SELECT 
+	  `id`,
+	  `foodName`,
+	  `kucun`,
+	  `type`,
+	  `units`,
+	  `price` 
+	FROM
+	  `food` 
+	LIMIT 0, 1000 ;
+	</select>
+	<delete id="delFood" parameterType="java.util.Map">
+		DELETE 
+	FROM
+	  `food` 
+	WHERE `id` = #{id} ;
+	</delete>
+</mapper>
